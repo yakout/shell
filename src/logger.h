@@ -13,6 +13,8 @@
 #include "shell_util.h"
 
 
+#define MAX_LOG_MSG_LENGTH 255
+
 /**
  * @brief [creates new log file for the current session]
  * @details [long description]
