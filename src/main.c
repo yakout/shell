@@ -50,9 +50,10 @@ int main(int argc, char *argv[], char *envp[]) {
 	// printf("lookup variable = #%s#\n", lookup_variable("HOME"));
 	// set_variable("HOME", "", 1);
 	// set_variable("y1", "j", 1);
+	// set_variable("x", "3", 1);
 	// print_all_variables();
 	// printf("lookup variable = #%s#\n", lookup_variable("HOME"));
-	// expand_variables("$x/$y/$y1/$HOME/end/$x/$x/ end/\"$y1\"/. ");
+	// printf("%s\n", expand_variables("$x/$y/$y1/$HOME/end/$x/$x/ end/\"$y1\"/. "));
 
 	// char ch[5] = "\"$x\"";
 	// replace_all(ch, '\"', ' ');

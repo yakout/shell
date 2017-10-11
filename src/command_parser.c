@@ -5,8 +5,8 @@ char* expand_variables(char* string) {
 	char *buffer = malloc(sizeof(char) * 255);
 	const char *current_variable;
 	int end = 0, start = 0;
-	int write_flag = 0; // write flag to buffer 
-	for (int i = 1, start = i; i <= strlen(string); ++i) {
+	int write_flag = 1; // write flag to buffer 
+	for (int i = 0, start = i; i <= strlen(string); ++i) {
 		// printf("string[i]=%c\n", string[i]);
 		if (string[i] == '$' || (!isalpha(string[i]) && !isdigit(string[i]))) {
 			if (!write_flag) {
