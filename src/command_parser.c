@@ -6,17 +6,16 @@ char* expand_variables(char* string) {
 	const char *current_variable;
 	int end = 0, start = 0;
 	int write_flag = 0; // write flag to buffer 
-	for (int i = 1, start = i; i < strlen(string); ++i) {
-		// printf("string[i]=%c\n", string[i]);
-		if (string[i] == '$' || !isalpha(string[i]) || !isdigit(string[i])) {
-			printf("string[i]=%c\n", string[i]);
+	for (int i = 1, start = i; i <= strlen(string); ++i) {
+		printf("string[i]=%c\n", string[i]);
+		if (string[i] == '$' || (!isalpha(string[i]) && !isdigit(string[i]))) {
 			if (!write_flag) {
 				end = i;
 				printf("string=%s\n", string);
 				printf("start=%d\n", start);
-				printf("end+1=%d\n", end + 1);
-				printf("substring=%s\n", substring(string, start, end + 1));
-				current_variable = lookup_variable(substring(string, start, end + 1));
+				printf("end+1=%d\n", end);
+				printf("substring=%s\n", substring(string, start, end));
+				current_variable = lookup_variable(substring(string, start, end));
 				printf("current_variable=%s\n", current_variable);
 				if (current_variable != NULL) {
 					strcat(buffer, current_variable);
@@ -24,15 +23,18 @@ char* expand_variables(char* string) {
 					// var not found
 					// strcat(buffer, "");
 				}
-				start = i + 1;
+				start = i + 2;
 			}
 			if (string[i] != '$') {
 				write_flag = 1;
 				strcat_c(buffer, string[i]);
 			} else {
 				write_flag = 0;
+				start = i + 1;
 			}
-		} 
+		} else if (write_flag) {
+			strcat_c(buffer, string[i]);
+		}
 	}
 	printf("buffer=%s\n", buffer);
 	return buffer;
@@ -85,9 +87,16 @@ command_t* parse_command(char* instr) {
 	int expression = 0;
 	if (contains(argv[0], '=')) {
 		// x=5
-		char **arr = split(instr, "=");
-		set_variable(arr[0], arr[1], 1);
-		printf("session variable is set: %s:%s\n", arr[0], arr[1]);
+		char **arr = split(instr, "=");	
+		if(arr[1] == NULL) {
+			// x=
+			set_variable(arr[0], "", 1);	
+			printf("session variable is set: %s:%s\n", arr[0], "");
+		} else {
+			// key=value
+			set_variable(arr[0], arr[1], 1);
+			printf("session variable is set: %s:%s\n", arr[0], arr[1]);
+		}
 		expression = 1;
 	} else if (strcmp(argv[0], "exit") == 0) {
 		printf("%s\n", "exiting shell ... done");
@@ -95,8 +104,15 @@ command_t* parse_command(char* instr) {
 	} else if (strcmp(argv[0], "export") == 0) {
 		char **arr;
 		if ((arr = split(argv[1], "=")) != NULL) {
-			set_variable(arr[0], arr[1], 1);
-			printf("environment variable is set: %s:%s\n", arr[0], arr[1]);
+			if(arr[1] == NULL) {
+				// x=
+				set_variable(arr[0], "", 1);
+				printf("environment variable is set: %s:%s\n", arr[0], "");
+			} else {
+				// key=value
+				set_variable(arr[0], arr[1], 1);
+				printf("environment variable is set: %s:%s\n", arr[0], arr[1]);
+			}
 		}
 		expression = 1;
 	}
