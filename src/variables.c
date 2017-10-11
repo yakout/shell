@@ -7,11 +7,12 @@ extern char **environ;
 char *keys[MAX_KEYS_SIZE];
 int keys_count = 0;
 
-const char* lookup_variable( const char* key ) {
+const char* lookup_variable(const char* key) {
+  // if not found null is returned ..
 	return getenv(key);
 }
 
-void set_variable(const char* key, const char* value, int replace) {
+void set_variable(char* key, const char* value, int replace) {
   keys[keys_count++] = key;
 	int status = setenv(key, value, replace);
   if (status == 0) {
@@ -40,6 +41,6 @@ void print_all_variables( void ) {
     // }
 
   for (int i = 0; i < keys_count; ++i) {
-    printf("%s\n", lookup_variable(keys[i]));
+    printf("%s=%s\n", keys[i], lookup_variable(keys[i]));
   }
 }

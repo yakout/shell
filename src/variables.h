@@ -17,7 +17,7 @@ const char* lookup_variable( const char* key );
 /*
 	- This function should be responsible for setting the value of a variable
 */
-void set_variable(const char* key , const char* value, int replace);
+void set_variable(char* key , const char* value, int replace);
 
 
 /*

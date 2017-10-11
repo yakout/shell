@@ -20,8 +20,8 @@
 
 char *HOME_PATH;
 char *CURRENT_WORKING_DIR;
+char *PREV_WORKING_DIR;
 char **ENVIRONMENT_PATHS;
-
 
 void setup_environment();
 char **get_environment_paths();

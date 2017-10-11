@@ -7,6 +7,7 @@
 
 #include "command.h"
 #include "shell_util.h"
+#include "variables.h"
 
 /* 
 	- This function should be responsible for importing all details of the command 
@@ -20,7 +21,16 @@
 	- Best practice is to use helper function for each collection of logical instructions,
 	  example: function for splitting the command by space into array of strings, ..etc
 */
-command* parse_command(char* instr);
+command_t *parse_command(char* instr);
+
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param string [description]
+ * @return [description]
+ */
+char* expand_variables(char* string);
 
 
 

@@ -8,11 +8,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <signal.h>
 
 #include "command.h"
 #include "shell_util.h"
 #include "environment.h"
+#include "cd.h"
+#include "echo.h"
+#include "history.h"
+#include "sigchild_handler.h"
 
-int execute(command *cmd);
+int execute(command_t *cmd);
 
 #endif // EXECUTER_H_

@@ -1,32 +1,38 @@
 #include "executer.h"
 
-
-void sigchld_handler(int sig) {
-	// sig is the SIGCHILD
-  	int status;
-    pid_t child_pid;
-    while ((child_pid = waitpid(-1, &status, WNOHANG)) > 0) {
-    	char buffer[255] = "";
-    	strcat(buffer, "Child Process terminated successfully pid=");
-    	char pid_number[10];
-		sprintf(pid_number, "%d", child_pid); 
-		strcat(buffer, pid_number);
-        append_to_logger(buffer, "DEBUG");
-    }
-}
-
-int execute(command *cmd) {
+int execute(command_t *cmd) {
 	// if (foreground) -> wait until the process finished before proceeding to next command and display the prompt
 	// else just display the propmpt and proceed to the next command
-	pid_t pid;
 
+	// handling special commands in parent process
+	if (strcmp(cmd->command_name, "history") == 0) {
+		history();
+		return 0;
+	} else if (strcmp(cmd->command_name, "cd") == 0) {
+		if (cmd->get_arguments(cmd)[1] == NULL) {
+			cd("~");
+		} else {
+			cd(cmd->get_arguments(cmd)[1]);
+		}
+		return 0;
+	} else if (strcmp(cmd->command_name, "echo") == 0) {
+		echo(cmd->get_arguments(cmd));
+		return 0;
+	} else if (cmd->expression) {
+		return 0;
+	}
+
+	/* SIGNAL HANDLERS */
 	signal(SIGCHLD, sigchld_handler);
+
+	/* PROCESS CREATION */
+	pid_t pid;
 	pid = fork();
 	if (pid == 0) {
 		// child process
-
 		/* SERACH PATHS FOR COMMAND AND EXECUTE */
 		char** paths = get_environment_paths();
+		// sleep(2);
 		while(*paths) {
 			char full_path[MAX_COMMAND_LENGTH] = "";
 			strcat(full_path, *paths);
@@ -41,29 +47,12 @@ int execute(command *cmd) {
 		printf("%s\n", "procees failed to create");
 		exit(EXIT_FAILURE);
 	} else {
-		int status;
-		pid_t child_pid;
-		if (!cmd->is_background_mode(cmd)) {
-			while ((child_pid = waitpid(pid, &status, 0)) > 0);
-		}
-
 		// parent process
-
-		// check if any child process has finished
-		// int status;
-		// pid_t ch_pid = waitpid(-1, &status, WNOHANG);
-		// if (cmd->is_background_mode(cmd)) {
-		// 	if (ch_pid > 0) {
-		// 		// child process terminated successfully
-		// 		append_to_logger("Child Process terminated successfully" , "DEBUG");
-		// 	} else {
-		// 		// child prcess terminated with error
-		// 		append_to_logger("Child Process terminated with error" , "DEBUG");
-		// 	}
-		// 	return status;
-		// } else {
+		int status;
+		if (!cmd->is_background_mode(cmd)) {
+			waitpid(pid, &status, 0);
+		}
 		return 0;
-		// }
 	}
 }
 

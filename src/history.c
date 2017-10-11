@@ -1,11 +1,7 @@
-#include "file_processing.h"
+#include "history.h"
 
-/* 
-	history file section
-*/
-
-char *HISTORY_FILE_NAME = "shell-history.txt";
-FILE* history_file;
+static char *HISTORY_FILE_NAME = "shell-history.txt";
+static FILE* history_file;
 
 void open_history_file() {
 	char full_path[50] = "";
@@ -21,6 +17,7 @@ FILE* get_history_file() {
 
 void add_to_history(char* instr) {
 	fprintf(history_file, "%s\n", instr);
+	fflush(history_file);
 }
 
 void close_history_file() {
@@ -31,20 +28,12 @@ void close_history_file() {
 	}
 }
 
+void history() {
+	FILE* history = get_history_file();
+	fseek(history, 0, SEEK_SET);
+	char line[MAX_COMMAND_LENGTH];
 
-/* 
-	CommandsBatch file section
-*/
-FILE* batch_file;
-
-void open_commands_batch_file(char *path) {
-	batch_file = fopen(path, "r");
-}
-
-FILE* get_commands_batch_file() {
-	return batch_file;
-}
-
-void close_commands_batch_file() {
-	fclose(batch_file);
+	while (fgets(line, MAX_COMMAND_LENGTH, history)) {
+		printf("%s", line);
+	}
 }

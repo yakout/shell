@@ -1,0 +1,21 @@
+#ifndef BATCH_SHELL_H_
+#define BATCH_SHELL_H_
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <errno.h>
+
+#include "shell_util.h"
+#include "executer.h"
+
+FILE* batch_file;
+
+void open_commands_batch_file(char *path);
+
+FILE* get_commands_batch_file();
+
+void close_commands_batch_file();
+
+void batch_mode();
+
+#endif // BATCH_SHELL_H_
