@@ -29,9 +29,14 @@ void cd(const char* path) {
 			chdir(path);
 			strcpy(full_path, path);
 		} else {
-			strcat(full_path, CURRENT_WORKING_DIR);
-			strcat(full_path, "/");
 			if (path[0] == '.') {
+				strcat(full_path, CURRENT_WORKING_DIR);
+				strcat(full_path, "/");
+				char *temp = substring(path, 1, -1);
+				strcat(full_path, temp);
+			} else if (path[0] == '~') {
+				strcat(full_path, lookup_variable("HOME"));
+				strcat(full_path, "/");
 				char *temp = substring(path, 1, -1);
 				strcat(full_path, temp);
 			} else {
@@ -40,7 +45,6 @@ void cd(const char* path) {
 			chdir(full_path);
 		}
 		if (errno != 0 && errno != 10) {
-			printf("#%d#\n", errno);
 			perror("");
 		} else {
 			strcpy(PREV_WORKING_DIR, CURRENT_WORKING_DIR);
