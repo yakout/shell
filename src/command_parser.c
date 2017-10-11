@@ -36,7 +36,7 @@ char* expand_variables(char* string) {
 			strcat_c(buffer, string[i]);
 		}
 	}
-	printf("buffer=%s\n", buffer);
+	// printf("buffer=%s\n", buffer);
 	return buffer;
 }
 
@@ -91,11 +91,11 @@ command_t* parse_command(char* instr) {
 		if(arr[1] == NULL) {
 			// x=
 			set_variable(arr[0], "", 1);	
-			printf("session variable is set: %s:%s\n", arr[0], "");
+			printf("session variable is set: %s=%s\n", arr[0], "");
 		} else {
 			// key=value
 			set_variable(arr[0], arr[1], 1);
-			printf("session variable is set: %s:%s\n", arr[0], arr[1]);
+			printf("session variable is set: %s=%s\n", arr[0], arr[1]);
 		}
 		expression = 1;
 	} else if (strcmp(argv[0], "exit") == 0) {
@@ -107,11 +107,11 @@ command_t* parse_command(char* instr) {
 			if(arr[1] == NULL) {
 				// x=
 				set_variable(arr[0], "", 1);
-				printf("environment variable is set: %s:%s\n", arr[0], "");
+				printf("environment variable is set: %s=%s\n", arr[0], "");
 			} else {
 				// key=value
 				set_variable(arr[0], arr[1], 1);
-				printf("environment variable is set: %s:%s\n", arr[0], arr[1]);
+				printf("environment variable is set: %s=%s\n", arr[0], arr[1]);
 			}
 		}
 		expression = 1;

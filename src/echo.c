@@ -15,6 +15,7 @@ void echo(char** argv) {
 	argv++; // ignore the the command name 'echo'
 
 	while(*argv) {
+		// printf("%s\n", *argv);
 		replace_all(*argv, '\"', ' ');
 		trim(*argv);
 		if (strcmp(*argv, "~") == 0) {
