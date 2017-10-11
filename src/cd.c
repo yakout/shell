@@ -4,6 +4,8 @@ void cd(const char* path) {
 	if (strcmp(path, "~") == 0) {
 		chdir(lookup_variable("HOME"));
 		if (errno != 0 && errno != 10) {
+			// errno=10 mean no child process which i don't what does it mean
+			// and why it happens so i am ignoring it for now.
 			perror("");
 		} else {
 			strcpy(PREV_WORKING_DIR, CURRENT_WORKING_DIR);

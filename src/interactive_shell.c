@@ -10,16 +10,16 @@ void interactive_mode() {
 		char *instruction;
 		instruction = read_line();
 		trim(instruction);
-
 		// printf("%s#\n", instruction);
-		if (strlen(instruction) == 0) {
-			continue;
-		}
 
 		if (instruction == NULL) {
 			// CNTRL + D (end of input) signal or no memory available to read more lines
 			printf("\n");
 			break;
+		}
+
+		if (strlen(instruction) == 0) {
+			continue;
 		}
 
 
