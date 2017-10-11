@@ -1,6 +1,7 @@
 #include "batch_shell.h"
 
 void open_commands_batch_file(char *path) {
+	printf("batch file path = %s\n", path);
 	batch_file = fopen(path, "r");
 }
 
@@ -17,7 +18,7 @@ void batch_mode(char *file_path) {
 
 	if (errno != 0) {
 		char *msg = strerror(errno);
-		printf("%s\n", msg);
+		printf("%s, batch file not found.\n", msg);
 		exit(1);
 	}
 

@@ -13,7 +13,7 @@
 
 /**
  * ASSUMPTIONS:
- * echo " will print " and will not print \n and wait for another "
+ * - echo " will print " and will not print \n and wait for another "
  * 
  * 
  */
@@ -60,20 +60,20 @@ int main(int argc, char *argv[], char *envp[]) {
 	// trim(ch);
 	// printf("%s\n", ch);
 
+
 	shell_init();
     if (argc == 2) {
     	// batch mode;
-		start_shell(true);
+		batch_mode(argv[1]);
     } else if (argc == 1) {
     	// interactive mode;
-        start_shell(false);
+        interactive_mode();
     } else {
     	printf("%s\n%s\n", "** Incorrect number of command line arguments **",
     	 "usage: shell [BATCH_FILE_PATH]");
     	return 1;
     }
     shell_close();
-    
     return 0;
 }
 

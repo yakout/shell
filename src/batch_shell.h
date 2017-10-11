@@ -16,6 +16,6 @@ FILE* get_commands_batch_file();
 
 void close_commands_batch_file();
 
-void batch_mode();
+void batch_mode(char *file_path);
 
 #endif // BATCH_SHELL_H_
