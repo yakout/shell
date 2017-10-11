@@ -7,16 +7,16 @@ char* expand_variables(char* string) {
 	int end = 0, start = 0;
 	int write_flag = 0; // write flag to buffer 
 	for (int i = 1, start = i; i <= strlen(string); ++i) {
-		printf("string[i]=%c\n", string[i]);
+		// printf("string[i]=%c\n", string[i]);
 		if (string[i] == '$' || (!isalpha(string[i]) && !isdigit(string[i]))) {
 			if (!write_flag) {
 				end = i;
-				printf("string=%s\n", string);
-				printf("start=%d\n", start);
-				printf("end+1=%d\n", end);
-				printf("substring=%s\n", substring(string, start, end));
+				// printf("string=%s\n", string);
+				// printf("start=%d\n", start);
+				// printf("end+1=%d\n", end);
+				// printf("substring=%s\n", substring(string, start, end));
 				current_variable = lookup_variable(substring(string, start, end));
-				printf("current_variable=%s\n", current_variable);
+				// printf("current_variable=%s\n", current_variable);
 				if (current_variable != NULL) {
 					strcat(buffer, current_variable);
 				} else {
@@ -71,7 +71,7 @@ command_t* parse_command(char* instr) {
 	}
 	// fill the args list
 	while (pch != NULL) {
-		printf("pch=%s\n", pch);
+		// printf("pch=%s\n", pch);
 		pch = strtok(NULL, " \n\t");
 		if (contains(pch, '$')) {
 			argv[argc++] = expand_variables(pch);

@@ -11,6 +11,13 @@
 #include "variables.h"
 
 
+/**
+ * ASSUMPTIONS:
+ * echo " will print " and will not print \n and wait for another "
+ * 
+ * 
+ */
+
 int main(int argc, char *argv[], char *envp[]) { 
 	// TEST CODE 
 	// assert(1==2);
@@ -40,25 +47,31 @@ int main(int argc, char *argv[], char *envp[]) {
 	// printf("test : %s\n", getenv("test"));
 
 
-	set_variable("x", "5", 1);
+	// printf("lookup variable = #%s#\n", lookup_variable("HOME"));
+	// set_variable("HOME", "", 1);
+	// set_variable("y1", "j", 1);
 	// print_all_variables();
-	// printf("lookup variable = %s\n", lookup_variable("x"));
-	printf("%s\n", expand_variables("$x")); 
+	// printf("lookup variable = #%s#\n", lookup_variable("HOME"));
+	// expand_variables("$x/$y/$y1/$HOME/end/$x/$x/ end/\"$y1\"/. ");
 
+	// char ch[5] = "\"$x\"";
+	// replace_all(ch, '\"', ' ');
+	// trim(ch);
+	// printf("%s\n", ch);
 
-	// shell_init();
- //    if (argc == 2) {
- //    	// batch mode;
-	// 	start_shell(true);
- //    } else if (argc == 1) {
- //    	// interactive mode;
- //        start_shell(false);
- //    } else {
- //    	printf("%s\n%s\n", "** Incorrect number of command line arguments **",
- //    	 "usage: shell [BATCH_FILE_PATH]");
- //    	return 1;
- //    }
- //    shell_close();
+	shell_init();
+    if (argc == 2) {
+    	// batch mode;
+		start_shell(true);
+    } else if (argc == 1) {
+    	// interactive mode;
+        start_shell(false);
+    } else {
+    	printf("%s\n%s\n", "** Incorrect number of command line arguments **",
+    	 "usage: shell [BATCH_FILE_PATH]");
+    	return 1;
+    }
+    shell_close();
     
     return 0;
 }

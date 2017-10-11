@@ -5,7 +5,7 @@ void interactive_mode() {
 	printf("%s\n", "Starting interactive mode ...");
 
 	while(1) {
-		printf("%s > ", CURRENT_WORKING_DIR);
+		printf("%s> ", get_current_dir());
 		
 		char *instruction;
 		instruction = read_line();
@@ -39,10 +39,10 @@ void interactive_mode() {
 		add_to_history(instruction);
 
 		// JUST FOR DEBUGING
-		printf("cmd_name = %s\n", cmd->command_name);
+		// printf("cmd_name = %s\n", cmd->command_name);
 		int i = 0;
 		while(cmd->arguments[i]) {
-			printf("arg[%d] = %s\n", i, cmd->arguments[i]);
+			// printf("arg[%d] = %s\n", i, cmd->arguments[i]);
 			i++;
 		}
 		//

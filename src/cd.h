@@ -7,6 +7,7 @@
 
 #include "environment.h"
 #include "shell_util.h"
+#include "variables.h"
 
 /**
  * @brief change current process directory

@@ -25,5 +25,6 @@ char **ENVIRONMENT_PATHS;
 
 void setup_environment();
 char **get_environment_paths();
+char *get_current_dir();
 
 #endif // ENVIRONMENT_H_

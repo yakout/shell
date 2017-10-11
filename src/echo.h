@@ -6,6 +6,7 @@
 #include <stdio.h>
 
 #include "variables.h"
+#include "shell_util.h"
 
 /**
  * @brief echo command.

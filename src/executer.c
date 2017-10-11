@@ -50,7 +50,8 @@ int execute(command_t *cmd) {
 		// parent process
 		int status;
 		if (!cmd->is_background_mode(cmd)) {
-			waitpid(pid, &status, 0);
+			pid_t child_pid;
+			while ((child_pid = waitpid(-1, &status, WUNTRACED)) > 0);
 		}
 		return 0;
 	}

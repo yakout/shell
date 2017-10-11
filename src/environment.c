@@ -27,6 +27,16 @@ void setup_environment() {
 
 
 
+char *get_current_dir() {
+	char *dir = malloc(255);
+	if (getcwd(dir, 255) != NULL) {
+		return dir;
+	} else {
+       perror("getcwd() error");
+       return NULL;
+	}	
+}
+
 char **get_environment_paths() {
 	return ENVIRONMENT_PATHS;
 }
