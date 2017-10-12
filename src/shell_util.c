@@ -154,3 +154,8 @@ void strcat_c (char *str, char ch) {
     *str++ = ch; 
     *str++ = '\0'; // terminating string
 }
+
+
+void to_lower(char *str) {
+    for (; *str; ++str) *str = tolower(*str);
+}

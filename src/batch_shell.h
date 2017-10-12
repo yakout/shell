@@ -7,6 +7,8 @@
 
 #include "shell_util.h"
 #include "executer.h"
+#include "command.h"
+#include "command_parser.h"
 
 FILE* batch_file;
 

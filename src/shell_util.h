@@ -84,6 +84,13 @@ void replace_all(char* str, char old, char new);
  * @param c [description]
  */
 void strcat_c(char *str, char ch);
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param str [description]
+ */
+void to_lower(char *str);
 
 
 #endif // SHELL_UTIL_H_

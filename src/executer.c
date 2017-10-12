@@ -5,6 +5,7 @@ int execute(command_t *cmd) {
 	// else just display the propmpt and proceed to the next command
 
 	// handling special commands in parent process
+	to_lower(cmd->command_name);
 	if (strcmp(cmd->command_name, "history") == 0) {
 		history();
 		return 0;
