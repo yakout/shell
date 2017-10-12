@@ -48,9 +48,14 @@ void trim(char* str) {
     // advance start to first nonspace character
     while(isspace(str[src])) src++;
 
+    int new_len = len - src;
     // shift the string
     for(; src < len; src++, dest++) {
         str[dest] = str[src];
+    }
+
+    for(int i = new_len; i < len; i++) {
+        str[i] = ' ';
     }
 
     // put all trailing spaces to '\0'

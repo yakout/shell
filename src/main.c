@@ -61,6 +61,11 @@ int main(int argc, char *argv[], char *envp[]) {
 	// printf("%s\n", ch);
 
 
+	// char buf[100] = "  						                   echo 1 + 2       2                  ";
+	// trim(buf);
+	// printf("%s\n", buf);
+	// printf("%d\n", strlen(buf));
+
 	shell_init();
     if (argc == 2) {
     	// batch mode;
