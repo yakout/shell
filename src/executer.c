@@ -34,13 +34,19 @@ int execute(command_t *cmd) {
 		/* SERACH PATHS FOR COMMAND AND EXECUTE */
 		char** paths = get_environment_paths();
 		// sleep(2);
-		while(*paths) {
-			char full_path[MAX_COMMAND_LENGTH] = "";
-			strcat(full_path, *paths);
-			strcat(full_path, SEPERATOR);
-			strcat(full_path, cmd->command_name);
-			execv(full_path, cmd->get_arguments(cmd));
-			paths++;
+		if (cmd->command_name[0] == '/') {
+			// if the user provides the path for the command.
+			execv(cmd->command_name, cmd->get_arguments(cmd));
+		} else {
+			// search for command path.
+			while(*paths) {
+				char full_path[MAX_COMMAND_LENGTH] = "";
+				strcat(full_path, *paths);
+				strcat(full_path, SEPERATOR);
+				strcat(full_path, cmd->command_name);
+				execv(full_path, cmd->get_arguments(cmd));
+				paths++;
+			}
 		}
 		perror("");
 		exit(EXIT_FAILURE);
