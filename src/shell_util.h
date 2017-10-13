@@ -91,6 +91,13 @@ void strcat_c(char *str, char ch);
  * @param str [description]
  */
 void to_lower(char *str);
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param instr [description]
+ */
+int is_comment(char *instr);
 
 
 #endif // SHELL_UTIL_H_

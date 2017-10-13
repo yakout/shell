@@ -164,3 +164,8 @@ void strcat_c (char *str, char ch) {
 void to_lower(char *str) {
     for (; *str; ++str) *str = tolower(*str);
 }
+
+
+int is_comment(char *instr) {
+    return instr[0] == '#';
+}

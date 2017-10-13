@@ -20,6 +20,9 @@ void interactive_mode() {
 
 		if (strlen(instruction) == 0) {
 			continue;
+		} else if (is_comment(instruction)) {
+			add_to_history(instruction);
+			continue;
 		}
 
 

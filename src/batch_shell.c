@@ -29,7 +29,7 @@ void batch_mode(char *file_path) {
         printf("%s", instruction);
         trim(instruction);
 
-        if (strlen(instruction) == 0) {
+        if (strlen(instruction) == 0 || is_comment(instruction)) {
 			continue;
 		}
 
