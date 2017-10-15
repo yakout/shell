@@ -9,6 +9,7 @@
 #include "logger.h"
 #include "command_parser.h"
 #include "variables.h"
+#include "cd.h"
 
 
 /**
@@ -19,6 +20,19 @@
  */
 
 int main(int argc, char *argv[], char *envp[]) { 
+	// char curr[20] = "../../dir/../";
+	// char **cur_dir_paths = split(curr, "/");	
+	// while(*cur_dir_paths) {
+	// 	printf("%s\n", *cur_dir_paths);
+	// 	cur_dir_paths++;
+	// }
+
+	// char path[100] = "../../../../../main/";
+	// if (strstr(path, "..") != NULL) {
+	// 	handle_parent_dir(path);
+	// 	return 0;
+	// }
+
 	// TEST CODE 
 	// assert(1==2);
 	// char str[] = "ls -a -l";

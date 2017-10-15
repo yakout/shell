@@ -16,6 +16,7 @@
  * @param path distenation path directory
  */
 void cd(const char* path);
+char** handle_parent_dir(const char* path);
 
 
 #endif // CHANGE_DIR_COMMAND_H_
